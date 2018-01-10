@@ -45,11 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private String dbUrl;
 
 	@Autowired
-	@Qualifier("dataSource")
+	@Qualifier("custinfo")
 	private DataSource dataSource;
 
-	private static final String USER_QUERY = "SELECT custid, password,role FROM userdata WHERE custid = ?";
-	private static final String ROLE_QUERY = "SELECT custid, reserve FROM userdata WHERE custid = ?";
+	private static final String USER_QUERY = "SELECT custid, password, effect FROM custinfo WHERE custid = ?";
+	private static final String ROLE_QUERY = "SELECT custid, role FROM custinfo WHERE custid = ?";
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
