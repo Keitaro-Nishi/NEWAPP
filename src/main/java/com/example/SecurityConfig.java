@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private String dbUrl;
 
 	@Autowired
-	@Qualifier("custinfo")
+	@Qualifier("dataSource")
 	private DataSource dataSource;
 
 	private static final String USER_QUERY = "SELECT custid, password, effect FROM custinfo WHERE custid = ?";
