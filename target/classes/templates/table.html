@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: base_header(~{::link},'table')">
+<link href="/stylesheets/jquery.bootgrid.css" rel="stylesheet" />
+</head>
+
+<body>
+<div th:replace="fragments/layout :: header"></div>
+
+<h2>Name List</h2>
+
+<table class="tbtest">
+<tr>
+  <th>Name</th>
+</tr>
+
+<tr th:each="name : ${name}">
+  <td th:text="${name}" class="tdtest"></td>
+</tr>
+</table>
+
+</body>
+</html>

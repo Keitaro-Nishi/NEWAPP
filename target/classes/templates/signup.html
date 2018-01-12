@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: base_header(~{::link},'アカウント登録')">
+<link href="/stylesheets/jquery.bootgrid.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div>
+
+		<form th:action="@{/account}" action="/account"
+			th:object="${accountForm}" method="post">
+
+			<h1>ユーザー登録</h1>
+
+			<div th:classappend="${#fields.hasErrors('custid')}? 'has-error'">
+				<label for="custid">ID</label>
+				<div>
+					<input id="custid" type="custid" th:field="*{email}" name="custid" />
+					<span th:if="${#fields.hasErrors('custid')}" th:errors="*{custid}">error!</span>
+				</div>
+			</div>
+
+			<div th:classappend="${#fields.hasErrors('custname')}? 'has-error'">
+				<label for="custname">氏名</label>
+				<div>
+					<input id="custname" type="custname" th:field="*{email}" name="custname" />
+					<span th:if="${#fields.hasErrors('custname')}" th:errors="*{custname}">error!</span>
+				</div>
+			</div>
+
+			<div th:classappend="${#fields.hasErrors('orgname')}? 'has-error'">
+				<label for="orgname">所属名</label>
+				<div>
+					<input id="orgname" type="orgname" th:field="*{email}" name="orgname" />
+					<span th:if="${#fields.hasErrors('orgname')}" th:errors="*{orgname}">error!</span>
+				</div>
+			</div>
+
+			<div th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+				<label for="password">パスワード</label>
+				<div>
+					<input id="password" type="password" th:field="*{password}"
+						name="password" /> <span th:if="${#fields.hasErrors('password')}"
+						th:errors="*{password}">error!</span>
+				</div>
+			</div>
+
+			<input type="submit" value="新規登録" />
+		</form>
+	</div>
+</body>
+</html>
