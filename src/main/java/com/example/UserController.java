@@ -1,59 +1,61 @@
 /*
-package com.example;
-
-import java.util.List;
+package jp.co.gyosei.botlog.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+//import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
-import src.main.java.com.example.Customer;
-import src.main.java.com.example.CustomerService;
+import jp.co.gyosei.botlog.domain.entity.CustinfoEntity;
+import jp.co.gyosei.botlog.domain.form.CustomerForm;
+import jp.co.gyosei.botlog.domain.form.CustomerListForm;
+import jp.co.gyosei.botlog.domain.service.CustinfoService;
+import jp.co.gyosei.botlog.domain.repository.CustinfoRepository;
 
-@RestController    // a
-@RequestMapping("api/customer")    // b
-public class CustomerRestController {
-    @Autowired    // c
-    CustomerService service;    // d
+import java.util.List;
+import java.util.ArrayList;
 
-    // 顧客全件取得
-    @RequestMapping(method=RequestMethod.GET)    // e
-    public List<Customer> getCustomer() {
-        return service.findAll();
-    }
-/*
-    // 顧客一件取得
-    @RequestMapping(method=RequestMethod.GET, value="{no}")    // f
-    public Customer getCustomer(@PathVariable Integer no) {
-        return service.findOne(id);
-    }
+@Controller
+public class CustomerListController {
 
-    // 顧客一件作成
-    @RequestMapping(method=RequestMethod.POST)    // g
-    @ResponseStatus(HttpStatus.CREATED)    // h
-    public Customer postCustomer(@RequestBody Customer customer) {
-        return service.create(customer);
-    }
+	@Autowired
+    CustinfoService custinfoService;
+	
+	@Autowired
+	CustinfoRepository custinfoRepository;
 
-    // 顧客一件更新
-    @RequestMapping(method=RequestMethod.PUT, value="{no}")    // i
-    public Customer putCustomer(@PathVariable Integer no,
-                                @RequestBody Customer customer) {
-        customer.setId(no);
-        return service.update(customer);
-    }
+	@RequestMapping(value = "CustomerList", method = RequestMethod.GET)
+	public String list(Model model) {
+		List<CustinfoEntity> custinfoEntity = custinfoRepository.findAll();
+		model.addAttribute("custinfoEntity",custinfoEntity);
+		model.addAttribute("customerListForm", new CustomerListForm());
+		return "CustomerList";
+	}
 
-    // 顧客一件削除
-    @RequestMapping(method=RequestMethod.DELETE, value="{no}")    // j
-    @ResponseStatus(HttpStatus.NO_CONTENT)    // k
-    public void deleteCustomer(@PathVariable Integer no) {
-        service.delete(no);
-    }
-
+	@RequestMapping(value = "CustomerList", method = RequestMethod.POST)
+    public String customerPost(Model model, @Valid CustomerListForm customerListForm, BindingResult bindingResult, HttpServletRequest request) {
+		
+		Integer[] rowIdsdata = customerListForm.getRowIds();
+		for(int i = 0; i < rowIdsdata.length; i++) {
+			Integer no = rowIdsdata[i];
+			custinfoRepository.delete(no);
+		}
+		return "Customer";
+	}
 }
 */

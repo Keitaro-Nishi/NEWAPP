@@ -1,4 +1,4 @@
-package com.example;
+/*package com.example;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -134,13 +134,12 @@ public class Main {
 		}
 	}
 
-/*
     @GetMapping("/index")
     public String hello(Model model) {
         model.addAttribute("list", Arrays.asList("SELECT custid, custname, orgname, reserve FROM userdata"));
         return "index";
     }
-*/
+
 	@Bean
 	@ConfigurationProperties("spring.datasource")
 	public DataSource dataSource() throws SQLException {
@@ -153,3 +152,4 @@ public class Main {
 		}
 	}
 }
+*/
